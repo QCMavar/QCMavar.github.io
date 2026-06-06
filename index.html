@@ -329,8 +329,7 @@
     .ia-mode-grid{grid-template-columns:repeat(2,1fr)}
   }
   </style>
-    <script src="config.js"></script>
-</head>
+  </head>
   <body>
 
   <!-- ===== AFFICHE D'ACCUEIL ===== -->
@@ -544,16 +543,9 @@
   <div id="panel-ia" class="panel">
 
     <div class="ia-header">
-      <div class="ia-badge">✨ Intelligence Artificielle &bull; Powered by Groq</div>
+      <div class="ia-badge">✨ Intelligence Artificielle &bull; Powered by Groq &bull; llama3-70b</div>
       <h1>Ton assistant L'Avare</h1>
       <p>Pose toutes tes questions sur L'Avare et Moli&egrave;re &mdash; l'IA te r&eacute;pond instantan&eacute;ment !</p>
-    </div>
-
-    <!-- Cle API -->
-    <!-- Clé chargée depuis config.js automatiquement -->
-    <div id="ia-key-status" style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:11px 16px;margin-bottom:18px;font-size:13px;color:#166534;font-family:Georgia,serif;display:flex;align-items:center;gap:8px">
-      <span id="ia-key-icon">⏳</span>
-      <span id="ia-key-msg">Chargement de la clé API...</span>
     </div>
 
     <!-- Modes -->
@@ -586,7 +578,7 @@
 
     <!-- Chat -->
     <div class="ia-chat" id="ia-chat">
-      <div class="ia-msg ai">👋 Bonjour ! Je suis ton assistant pour <strong>L'Avare de Moli&egrave;re</strong>. Entre ta cl&eacute; Groq ci-dessus puis pose-moi toutes tes questions sur la pi&egrave;ce, les personnages ou Moli&egrave;re. Je suis l&agrave; pour t'aider &agrave; r&eacute;viser !</div>
+      <div class="ia-msg ai">👋 Bonjour ! Je suis ton assistant IA pour <strong>L'Avare de Moli&egrave;re</strong>. Choisis un mode ci-dessus et pose-moi toutes tes questions &mdash; je suis pr&ecirc;t !</div>
     </div>
 
     <!-- Input -->
@@ -1590,43 +1582,18 @@
     }
   });
 
-  // --- IA GROQ ---
-  // Clé chargée depuis config.js (variable GROQ_API_KEY)
-  var groqKey = (typeof GROQ_API_KEY !== 'undefined' && GROQ_API_KEY && GROQ_API_KEY !== 'mets-ta-cle-groq-ici')
-    ? GROQ_API_KEY
-    : '';
+  // --- IA GROQ (clé intégrée) ---
+  // ⚠️ Remplace la valeur ci-dessous par ta clé Groq (gsk_...)
+  var GROQ_KEY = "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";
   var iaMode = 'avare';
   var iaHistory = [];
 
-  // Affiche le statut de la clé au chargement
-  (function(){
-    var icon = document.getElementById('ia-key-icon');
-    var msg  = document.getElementById('ia-key-msg');
-    var box  = document.getElementById('ia-key-status');
-    if(!icon || !msg || !box) return;
-    if(groqKey){
-      icon.textContent = '✅';
-      msg.textContent  = 'IA prête ! Clé Groq chargée automatiquement.';
-      box.style.background = '#f0fdf4';
-      box.style.borderColor = '#bbf7d0';
-      box.style.color = '#166534';
-    } else {
-      icon.textContent = '⚠️';
-      msg.innerHTML = 'Clé API manquante — ouvre <strong>config.js</strong> et colle ta clé Groq.';
-      box.style.background = '#fff7ed';
-      box.style.borderColor = '#fed7aa';
-      box.style.color = '#92400e';
-    }
-  })();
-
   var MODES = {
-    avare:   { sys: "Tu es un assistant expert en litterature francaise specialise dans L'Avare de Moliere. Tu aides des eleves de 5e (college) a comprendre la piece. Reponds en francais, de facon claire et adaptee a leur age. Sois precis, donne des exemples de la piece.", quick:["C'est quoi la cassette ?","Pourquoi Harpagon est avare ?","Resumer l'acte I","Quel est le theme principal ?","Qu'est-ce qu'un quiproquo ?","Expliquer le monologue IV.4"] },
-    moliere: { sys: "Tu es un expert de Moliere et du XVIIe siecle. Tu aides des eleves de 5e a connaitre la vie et l'oeuvre de Moliere. Reponds en francais simplement.", quick:["Qui est Moliere ?","Quand a-t-il vecu ?","Pourquoi il ecrivait des comedies ?","Qu'est-ce que la comedie-ballet ?","Comment etait le theatre au XVIIe s ?","Autres pieces de Moliere ?"] },
-    perso:   { sys: "Tu es un expert des personnages de L'Avare de Moliere. Tu analyses les roles, les relations et les motivations de chaque personnage pour des eleves de 5e. Reponds en francais.", quick:["Decris Harpagon","Qui est La Fleche ?","Pourquoi Valere flatte-t-il ?","Maitre Jacques : role comique ?","Anselme : le bon pere ?","Frosine est-elle mechante ?"] },
-    revision:{ sys: "Tu es un professeur qui fait reviser L'Avare de Moliere a des eleves de 5e. Pose des questions de controle adaptees, corriges les reponses et expliques les erreurs avec bienveillance. Reponds en francais.", quick:["Pose-moi une question","Question sur l'acte II","Teste mes connaissances sur les personnages","Question difficile","Verifier cette reponse : ...","Explication du denouement"] }
+    avare:   { sys:"Tu es un assistant expert en litterature francaise specialise dans L'Avare de Moliere. Tu aides des eleves de 5e (college). Reponds en francais, clairement, avec des exemples de la piece. Sois concis.", quick:["C'est quoi la cassette ?","Pourquoi Harpagon est avare ?","Resumer l'acte I","Quel est le theme principal ?","Qu'est-ce qu'un quiproquo ?","Expliquer le monologue IV.4"] },
+    moliere: { sys:"Tu es un expert de Moliere et du XVIIe siecle. Tu aides des eleves de 5e. Reponds en francais simplement et clairement.", quick:["Qui est Moliere ?","Quand a-t-il vecu ?","Pourquoi il ecrivait des comedies ?","Qu'est-ce que la comedie-ballet ?","Comment etait le theatre au XVIIe s ?","Autres pieces de Moliere ?"] },
+    perso:   { sys:"Tu es un expert des personnages de L'Avare de Moliere. Tu analyses les roles et motivations pour des eleves de 5e. Reponds en francais.", quick:["Decris Harpagon","Qui est La Fleche ?","Pourquoi Valere flatte-t-il ?","Maitre Jacques : role comique ?","Anselme : le bon pere ?","Frosine est-elle mechante ?"] },
+    revision:{ sys:"Tu es un professeur bienveillant qui fait reviser L'Avare de Moliere a des eleves de 5e. Pose des questions adaptees, corriges gentiment. Reponds en francais.", quick:["Pose-moi une question","Question sur l'acte II","Question sur les personnages","Question difficile","Expliquer le denouement","Qu'est-ce qu'une comedie ?"] }
   };
-
-  // saveGroqKey() supprimé — clé dans config.js
 
   function setMode(el, mode){
     document.querySelectorAll('.ia-mode-card').forEach(function(c){c.classList.remove('active');});
@@ -1635,16 +1602,14 @@
     iaHistory = [];
     renderQuickBtns();
     var chat = document.getElementById('ia-chat');
-    chat.innerHTML = '<div class="ia-msg ai">Mode change ! Je suis maintenant en mode <strong>' + el.querySelector('.imnm').textContent + '</strong>. Pose ta question !</div>';
+    chat.innerHTML = '<div class="ia-msg ai">Mode <strong>' + el.querySelector('.imnm').textContent + '</strong> actif ! Pose ta question.</div>';
     sndNav();
   }
 
   function renderQuickBtns(){
     var qs = MODES[iaMode].quick;
     var h = '';
-    qs.forEach(function(q){
-      h += '<button onclick="quickQ(this)">' + q + '</button>';
-    });
+    qs.forEach(function(q){ h += '<button onclick="quickQ(this)">' + q + '</button>'; });
     document.getElementById('ia-quick-btns').innerHTML = h;
   }
 
@@ -1654,10 +1619,13 @@
   }
 
   async function sendIA(){
-    if(!groqKey){
-      alert("Clé API manquante !\n\nOuvre le fichier config.js et remplace\n\'mets-ta-cle-groq-ici\'\npar ta vraie clé Groq (gsk_...)");
+    var k = GROQ_KEY;
+    if(!k || k === 'REMPLACE_ICI_TA_CLE_GROQ'){
+      var chat = document.getElementById('ia-chat');
+      chat.innerHTML += '<div class="ia-msg ai" style="border-left-color:#dc2626">❌ <strong>Clé Groq manquante.</strong><br>Ouvre le fichier HTML et remplace <code>REMPLACE_ICI_TA_CLE_GROQ</code> par ta clé Groq (<a href="https://console.groq.com" target="_blank" style="color:#7c3aed">console.groq.com</a>).</div>';
       return;
     }
+
     var inp = document.getElementById('ia-input');
     var msg = inp.value.trim();
     if(!msg) return;
@@ -1666,33 +1634,23 @@
     var chat = document.getElementById('ia-chat');
     var sendBtn = document.getElementById('ia-send-btn');
 
-    // Affiche message user
     chat.innerHTML += '<div class="ia-msg user">' + escHTML(msg) + '</div>';
     var loadDiv = document.createElement('div');
     loadDiv.className = 'ia-msg loading';
-    loadDiv.textContent = '✍️ L\'IA réfléchit...';
+    loadDiv.textContent = "✍️ L'IA réfléchit...";
     chat.appendChild(loadDiv);
     chat.scrollTop = chat.scrollHeight;
     sendBtn.disabled = true;
     sndIASend();
 
-    // Build messages
-    iaHistory.push({role:'user', content: msg});
-    var messages = [{role:'system', content: MODES[iaMode].sys}].concat(iaHistory.slice(-8));
+    iaHistory.push({role:'user', content:msg});
+    var messages = [{role:'system', content:MODES[iaMode].sys}].concat(iaHistory.slice(-8));
 
     try {
       var resp = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + groqKey
-        },
-        body: JSON.stringify({
-          model: 'llama3-70b-8192',
-          messages: messages,
-          max_tokens: 600,
-          temperature: 0.7
-        })
+        method:'POST',
+        headers:{'Content-Type':'application/json','Authorization':'Bearer ' + k},
+        body:JSON.stringify({model:'llama3-8b-8192', messages:messages, max_tokens:600, temperature:0.7})
       });
 
       if(!resp.ok){
@@ -1702,7 +1660,7 @@
 
       var data = await resp.json();
       var reply = data.choices[0].message.content;
-      iaHistory.push({role:'assistant', content: reply});
+      iaHistory.push({role:'assistant', content:reply});
 
       loadDiv.remove();
       var aiDiv = document.createElement('div');
@@ -1716,11 +1674,10 @@
       loadDiv.remove();
       var errDiv = document.createElement('div');
       errDiv.className = 'ia-msg ai';
-      errDiv.innerHTML = '❌ <strong>Erreur :</strong> ' + escHTML(e.message) + '<br><small>Verifie ta cle API Groq.</small>';
+      errDiv.innerHTML = '❌ <strong>Erreur :</strong> ' + escHTML(e.message);
       chat.appendChild(errDiv);
       sndWrong();
     }
-
     sendBtn.disabled = false;
   }
 
@@ -1729,21 +1686,18 @@
   }
 
   function formatIAReply(txt){
-    // basic markdown-ish formatting
     txt = escHTML(txt);
-    txt = txt.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-    txt = txt.replace(/\*(.*?)\*/g, '<em>$1</em>');
-    txt = txt.replace(/\n\n/g, '</p><p style="margin:6px 0">');
-    txt = txt.replace(/\n/g, '<br>');
+    txt = txt.replace(/\*\*(.*?)\*\*/g,'<strong>$1</strong>');
+    txt = txt.replace(/\*(.*?)\*/g,'<em>$1</em>');
+    txt = txt.replace(/\n\n/g,'</p><p style="margin:6px 0">');
+    txt = txt.replace(/\n/g,'<br>');
     return '<p style="margin:0">' + txt + '</p>';
   }
 
-  // Enter to send
   document.getElementById('ia-input').addEventListener('keydown', function(e){
     if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); sendIA(); }
   });
 
-  // Init IA
   renderQuickBtns();
 
   // Hook sons sur QCM (correct/wrong) - patch mv() pour ajouter son
