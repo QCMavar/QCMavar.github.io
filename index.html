@@ -245,6 +245,38 @@
   .ia-groq-note a:hover{text-decoration:underline}
 
 
+
+  /* ===== ECRAN RESULTAT ===== */
+  #panel-result { }
+  .res-card{background:#fff;border-radius:16px;padding:32px 28px;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,.1);max-width:560px;margin:0 auto 24px}
+  .res-note{font-size:72px;font-weight:800;line-height:1;margin:8px 0 4px;font-family:Georgia,serif}
+  .res-sur{font-size:22px;color:#64748b;margin-bottom:6px;font-family:Georgia,serif}
+  .res-titre{font-size:14px;color:#64748b;margin-bottom:20px;font-family:Georgia,serif;font-style:italic}
+  .res-stars{font-size:32px;letter-spacing:4px;margin-bottom:16px}
+  .res-msg{font-size:15px;font-weight:700;margin-bottom:6px;font-family:Georgia,serif}
+  .res-sub{font-size:13px;color:#64748b;font-family:Georgia,serif}
+  .res-bar-wrap{background:#f1f5f9;border-radius:99px;height:14px;margin:18px 0;overflow:hidden}
+  .res-bar{height:100%;border-radius:99px;transition:width 1.2s cubic-bezier(.22,.68,0,1.1)}
+  .res-detail{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;max-width:560px;margin:0 auto 20px}
+  .res-detail-hd{padding:12px 18px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#64748b;border-bottom:1px solid #e2e8f0;background:#fff}
+  .res-row{display:flex;align-items:flex-start;gap:10px;padding:11px 16px;border-bottom:1px solid #f1f5f9;font-size:13px;line-height:1.5}
+  .res-row:last-child{border-bottom:none}
+  .res-row .rnum{flex-shrink:0;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff}
+  .res-row .rtxt{flex:1;color:#334155}
+  .res-row .rbon{font-size:11px;color:#16a34a;margin-top:2px;font-weight:600}
+  .res-row .rexp{font-size:11px;color:#64748b;margin-top:2px;font-style:italic}
+  .res-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;max-width:560px;margin:0 auto}
+  .res-btn{padding:12px 24px;border:none;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;font-family:Georgia,serif;transition:all .18s}
+  .res-btn-pri{background:#0f172a;color:#fff}
+  .res-btn-pri:hover{background:#1e3a8a}
+  .res-btn-sec{background:#f1f5f9;color:#334155;border:1px solid #e2e8f0}
+  .res-btn-sec:hover{background:#e2e8f0}
+
+  /* Confetti animation */
+  .confetti-wrap{position:fixed;inset:0;pointer-events:none;z-index:1000;overflow:hidden}
+  .conf{position:absolute;top:-10px;border-radius:2px;animation:fall linear forwards}
+  @keyframes fall{to{transform:translateY(110vh) rotate(720deg);opacity:0}}
+
   /* Touch targets minimum 44px sur mobile */
   @media(max-width:768px){
     .sopt,.pcard,.ia-mode-card,.atab,.acard{
@@ -538,6 +570,17 @@
     <strong>Categorie 3</strong> -- Les types de comique (10 questions)</p>
   </div>
 
+
+  <!-- ===== PANEL RESULTAT ===== -->
+  <div id="panel-result" class="panel">
+    <div id="res-card-main" class="res-card"></div>
+    <div class="res-detail" id="res-detail-box">
+      <div class="res-detail-hd">Détail question par question</div>
+      <div id="res-detail-rows"></div>
+    </div>
+    <div class="res-btns" id="res-btns"></div>
+  </div>
+  <!-- ===== FIN PANEL RESULTAT ===== -->
 
   <!-- ===== PANNEAU IA ===== -->
   <div id="panel-ia" class="panel">
@@ -1306,28 +1349,130 @@
   function finQ(){
     var cor=0;
     quiz.answers.forEach(function(a,i){if(a===quiz.questions[i].r)cor++;});
-    var tot=quiz.questions.length,gr=Math.round(cor/tot*20);
+    var tot=quiz.questions.length;
+    var gr=Math.round(cor/tot*20);
     scores[quiz.key]=gr;
     try{localStorage.setItem('lav3',JSON.stringify(scores));}catch(e){}
-    alert('Resultat : '+cor+'/'+tot+' reponses correctes\nNote : '+gr+'/20');
-    if(quiz.key.indexOf('vt-')===0){
-      var n=parseInt(quiz.key.split('-')[1]);
-      nav('vocab-theatre');
-      selVTab(n);
-      return;
-    }
-    var pts=quiz.key.split('-'),aid=parseInt(pts[0]),sid=parseInt(pts[1]);
-    if(fromL){
-      nav('lecons');
-      selAct(aid);
-      setTimeout(function(){
-        var bl=document.querySelectorAll('.lb');
-        if(bl[sid-1]) bl[sid-1].scrollIntoView({behavior:'smooth'});
-      },150);
+
+    // Sons selon la note
+    if(gr>=16){
+      sndVictoire();
+    } else if(gr>=10){
+      sndCorrect();
     } else {
-      nav('qcm');
-      showSc(aid);
+      sndWrong();
     }
+
+    // Confettis si bonne note
+    if(gr>=14) lancerConfettis();
+
+    // Construire l'écran résultat
+    var pct=Math.round(cor/tot*100);
+    var couleur=gr>=14?'#15803d':gr>=10?'#d97706':'#dc2626';
+    var barColor=gr>=14?'#22c55e':gr>=10?'#f59e0b':'#ef4444';
+
+    var msg, sub, stars;
+    if(gr>=18){msg="Excellent !";sub="Performance remarquable !";stars="⭐⭐⭐⭐⭐";}
+    else if(gr>=16){msg="Très bien !";sub="Tu maîtrises bien la pièce.";stars="⭐⭐⭐⭐⭐";}
+    else if(gr>=14){msg="Bien !";sub="Tu connais bien L'Avare.";stars="⭐⭐⭐⭐";}
+    else if(gr>=12){msg="Assez bien";sub="Encore un peu de révision.";stars="⭐⭐⭐";}
+    else if(gr>=10){msg="Passable";sub="Relis les analyses de scènes.";stars="⭐⭐";}
+    else if(gr>=6){msg="Insuffisant";sub="Il faut retravailler ce passage.";stars="⭐";}
+    else{msg="À revoir";sub="Relis attentivement le cours.";stars="❌";}
+
+    // Carte principale
+    document.getElementById('res-card-main').innerHTML=
+      '<div class="res-titre">'+escHTML(quiz.title)+'</div>'+
+      '<div class="res-stars">'+stars+'</div>'+
+      '<div class="res-note" style="color:'+couleur+'">'+gr+'</div>'+
+      '<div class="res-sur">/20</div>'+
+      '<div class="res-bar-wrap"><div class="res-bar" id="res-bar-anim" style="width:0%;background:'+barColor+'"></div></div>'+
+      '<div class="res-msg">'+msg+'</div>'+
+      '<div class="res-sub">'+cor+' bonne'+(cor>1?'s':'')+' réponse'+(cor>1?'s':'')+' sur '+tot+' — '+sub+'</div>';
+
+    // Animer la barre après un court délai
+    setTimeout(function(){
+      var bar=document.getElementById('res-bar-anim');
+      if(bar) bar.style.width=pct+'%';
+    },100);
+
+    // Détail Q par Q
+    var rows='';
+    quiz.questions.forEach(function(q,i){
+      var a=quiz.answers[i];
+      var ok=a===q.r;
+      rows+='<div class="res-row">';
+      rows+='<div class="rnum" style="background:'+(ok?'#15803d':'#dc2626')+'">'+( ok?'✓':'✗')+'</div>';
+      rows+='<div class="rtxt">';
+      rows+='<strong>Q'+(i+1)+'.</strong> '+escHTML(q.q);
+      if(!ok && a){
+        rows+='<div class="rbon">✓ Bonne réponse : '+q.r.toUpperCase()+'. '+escHTML(q[q.r])+'</div>';
+      }
+      rows+='<div class="rexp">'+escHTML(q.e)+'</div>';
+      rows+='</div></div>';
+    });
+    document.getElementById('res-detail-rows').innerHTML=rows;
+
+    // Boutons retour
+    var btns='';
+    if(quiz.key.indexOf('vt-')===0){
+      var nv=parseInt(quiz.key.split('-')[1]);
+      btns='<button class="res-btn res-btn-pri" onclick="retourVT('+nv+')">← Retour au vocabulaire</button>';
+    } else {
+      var pts2=quiz.key.split('-'),aid2=parseInt(pts2[0]),sid2=parseInt(pts2[1]);
+      if(fromL){
+        btns='<button class="res-btn res-btn-pri" onclick="retourLecon('+aid2+','+sid2+')">← Retour au cours</button>';
+      } else {
+        btns='<button class="res-btn res-btn-pri" onclick="retourQCM('+aid2+')">← Retour aux QCM</button>';
+      }
+    }
+    btns+='<button class="res-btn res-btn-sec" onclick="navMoy()">📊 Voir ma moyenne</button>';
+    document.getElementById('res-btns').innerHTML=btns;
+
+    nav('result');
+  }
+
+  function retourLecon(aid,sid){
+    nav('lecons'); selAct(aid);
+    setTimeout(function(){
+      var bl=document.querySelectorAll('.lb');
+      if(bl[sid-1]) bl[sid-1].scrollIntoView({behavior:'smooth'});
+    },150);
+  }
+  function retourQCM(aid){ nav('qcm'); showSc(aid); }
+  function retourVT(n){ nav('vocab-theatre'); selVTab(n); }
+
+  function lancerConfettis(){
+    var wrap=document.createElement('div');
+    wrap.className='confetti-wrap';
+    document.body.appendChild(wrap);
+    var colors=['#f59e0b','#3b82f6','#22c55e','#ec4899','#a855f7','#ef4444','#06b6d4'];
+    for(var i=0;i<60;i++){
+      var c=document.createElement('div');
+      c.className='conf';
+      var size=Math.random()*10+6;
+      c.style.cssText=[
+        'left:'+(Math.random()*100)+'%',
+        'width:'+size+'px','height:'+size+'px',
+        'background:'+colors[Math.floor(Math.random()*colors.length)],
+        'opacity:'+(Math.random()*0.7+0.3),
+        'animation-duration:'+(Math.random()*2+1.5)+'s',
+        'animation-delay:'+(Math.random()*0.8)+'s',
+        'transform:rotate('+(Math.random()*360)+'deg)'
+      ].join(';');
+      wrap.appendChild(c);
+    }
+    setTimeout(function(){ wrap.remove(); }, 3500);
+  }
+
+  function navMoy(){ nav("moyenne"); renderM(); }
+
+  function sndVictoire(){
+    var notes=[523,659,784,1047,784,1047];
+    var delays=[0,120,240,360,480,600];
+    notes.forEach(function(n,i){
+      setTimeout(function(){ playTone(n,0.22,'sine',0.2); },delays[i]);
+    });
   }
 
   // ===== MOYENNE =====
