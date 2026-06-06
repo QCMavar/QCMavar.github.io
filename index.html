@@ -543,7 +543,7 @@
   <div id="panel-ia" class="panel">
 
     <div class="ia-header">
-      <div class="ia-badge">✨ Intelligence Artificielle &bull; Powered by Groq &bull; llama3-70b</div>
+      <div class="ia-badge">✨ Intelligence Artificielle &bull; Powered by Groq &bull; llama-3.1-8b-instant</div>
       <h1>Ton assistant L'Avare</h1>
       <p>Pose toutes tes questions sur L'Avare et Moli&egrave;re &mdash; l'IA te r&eacute;pond instantan&eacute;ment !</p>
     </div>
@@ -1650,7 +1650,7 @@
       var resp = await fetch('https://api.groq.com/openai/v1/chat/completions', {
         method:'POST',
         headers:{'Content-Type':'application/json','Authorization':'Bearer ' + k},
-        body:JSON.stringify({model:'llama3-8b-8192', messages:messages, max_tokens:600, temperature:0.7})
+        body:JSON.stringify({model:'llama-3.1-8b-instant', messages:messages, max_tokens:600, temperature:0.7})
       });
 
       if(!resp.ok){
