@@ -196,16 +196,141 @@
     margin-top:10px;font-family:Georgia,serif;
   }
 
-  @media(max-width:640px){
-    .nb{padding:0 14px;height:auto;flex-direction:column;padding:10px 14px;gap:8px}
-    .nb .nm{flex-wrap:wrap;justify-content:center}
-    .main{margin:18px auto;padding:0 12px}
-    .panel{padding:20px 16px}
+
+  /* ===== PANNEAU IA ===== */
+  #panel-ia { }
+  .ia-header{background:linear-gradient(135deg,#1e1b4b 0%,#312e81 50%,#1e3a8a 100%);border-radius:14px;padding:24px 22px 20px;color:#fff;margin-bottom:22px;position:relative;overflow:hidden}
+  .ia-header::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+  .ia-header h1{font-size:22px;margin:0 0 5px;font-family:Georgia,serif;position:relative}
+  .ia-header p{font-size:13px;opacity:.8;margin:0;position:relative;font-family:Georgia,serif}
+  .ia-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);border-radius:20px;padding:4px 12px;font-size:11px;font-weight:700;margin-bottom:10px;letter-spacing:.5px}
+
+  .ia-key-section{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px;margin-bottom:18px}
+  .ia-key-section label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#64748b;display:block;margin-bottom:8px}
+  .ia-key-row{display:flex;gap:8px;align-items:center}
+  .ia-key-input{flex:1;padding:9px 12px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:13px;font-family:Georgia,serif;outline:none;transition:border .15s;background:#fff}
+  .ia-key-input:focus{border-color:#7c3aed}
+  .ia-key-btn{padding:9px 16px;background:#7c3aed;color:#fff;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:Georgia,serif;white-space:nowrap;transition:background .15s}
+  .ia-key-btn:hover{background:#6d28d9}
+  .ia-key-ok{font-size:12px;color:#16a34a;margin-top:6px;display:none}
+
+  .ia-mode-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-bottom:18px}
+  .ia-mode-card{border:2px solid #e2e8f0;border-radius:10px;padding:12px 10px;text-align:center;cursor:pointer;transition:all .18s;background:#fff;font-family:Georgia,serif}
+  .ia-mode-card:hover,.ia-mode-card.active{border-color:#7c3aed;background:#f5f3ff}
+  .ia-mode-card.active{box-shadow:0 0 0 3px rgba(124,58,237,.18)}
+  .ia-mode-card .imem{font-size:26px;display:block;margin-bottom:5px}
+  .ia-mode-card .imnm{font-size:12px;font-weight:700;color:#1e293b}
+  .ia-mode-card .imsub{font-size:10px;color:#64748b;margin-top:2px}
+
+  .ia-chat{background:#fff;border:1px solid #e2e8f0;border-radius:12px;min-height:220px;max-height:420px;overflow-y:auto;padding:14px;margin-bottom:12px;display:flex;flex-direction:column;gap:10px}
+  .ia-msg{max-width:88%;padding:10px 14px;border-radius:10px;font-size:13px;line-height:1.65;font-family:Georgia,serif}
+  .ia-msg.user{background:#312e81;color:#fff;align-self:flex-end;border-bottom-right-radius:3px}
+  .ia-msg.ai{background:#f1f5f9;color:#1e293b;align-self:flex-start;border-bottom-left-radius:3px;border-left:3px solid #7c3aed}
+  .ia-msg.ai strong{color:#7c3aed}
+  .ia-msg.loading{background:#f1f5f9;color:#94a3b8;align-self:flex-start;font-style:italic}
+
+  .ia-input-row{display:flex;gap:8px}
+  .ia-input{flex:1;padding:10px 13px;border:1.5px solid #e2e8f0;border-radius:9px;font-size:13px;font-family:Georgia,serif;outline:none;transition:border .15s;resize:none}
+  .ia-input:focus{border-color:#7c3aed}
+  .ia-send{padding:10px 18px;background:#312e81;color:#fff;border:none;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;font-family:Georgia,serif;transition:background .15s}
+  .ia-send:hover{background:#7c3aed}
+  .ia-send:disabled{background:#94a3b8;cursor:not-allowed}
+
+  .ia-quick{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+  .ia-quick button{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;padding:5px 11px;font-size:11px;cursor:pointer;font-family:Georgia,serif;color:#334155;transition:all .15s}
+  .ia-quick button:hover{background:#312e81;color:#fff;border-color:#312e81}
+
+  .ia-groq-note{font-size:11px;color:#94a3b8;text-align:center;margin-top:8px;font-family:Georgia,serif}
+  .ia-groq-note a{color:#7c3aed;text-decoration:none}
+  .ia-groq-note a:hover{text-decoration:underline}
+
+
+  /* Touch targets minimum 44px sur mobile */
+  @media(max-width:768px){
+    .sopt,.pcard,.ia-mode-card,.atab,.acard{
+      min-height:44px;
+    }
+    button{min-height:40px}
+    .nb .nm button{min-height:38px}
+  }
+
+  /* ===== RESPONSIVE MOBILE ===== */
+  @media(max-width:768px){
+    /* Navbar : barre fixe en bas sur mobile */
+    .nb{
+      position:fixed;bottom:0;left:0;right:0;top:auto;
+      height:auto;padding:6px 4px 8px;
+      flex-direction:column;gap:4px;
+      border-top:1px solid var(--bdr);border-bottom:none;
+      box-shadow:0 -4px 20px rgba(0,0,0,.12);
+      z-index:200;
+    }
+    .nb .logo{display:none}
+    .nb .nm{
+      display:flex;flex-wrap:nowrap;overflow-x:auto;
+      gap:2px;width:100%;justify-content:flex-start;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+      padding-bottom:2px;
+    }
+    .nb .nm::-webkit-scrollbar{display:none}
+    .nb .nm button{
+      flex-shrink:0;
+      font-size:11px;padding:7px 11px;
+      border-radius:8px;white-space:nowrap;
+    }
+    /* Décale le contenu pour la navbar du bas */
+    .main{
+      margin:10px auto 80px;
+      padding:0 10px;
+    }
+    .panel{padding:16px 12px}
+
+    /* Grilles */
     .hgrid,.dgrid,.mtop{grid-template-columns:1fr}
-    .acgrid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
+    .acgrid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr))}
+
+    /* Perso grid */
+    #perso-grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr))}
+
+    /* IA panel mobile */
+    .ia-mode-grid{grid-template-columns:repeat(2,1fr)}
+    .ia-chat{max-height:280px}
+    .ia-input-row{flex-direction:column}
+    .ia-send{width:100%}
+    .ia-key-row{flex-direction:column}
+    .ia-key-btn{width:100%}
+
+    /* Affiche popup mobile */
+    #affiche-box{max-width:98vw;margin:10px}
+    #affiche-header{padding:22px 18px 18px}
+    #affiche-body{padding:18px 16px 14px}
+
+    /* Arbre famille : scroll horizontal */
+    #famille-tree{overflow-x:auto;-webkit-overflow-scrolling:touch}
+    #famille-tree svg{min-width:520px}
+
+    /* Modale perso : plein écran */
+    #perso-modal > div{
+      max-width:100%;max-height:92vh;
+      border-radius:14px 14px 0 0;
+      position:fixed;bottom:0;left:0;right:0;
+    }
+
+    /* QCM */
+    .sopt{font-size:13px;padding:10px 12px}
+    h1{font-size:20px}
+    h3{font-size:15px}
+  }
+
+  @media(max-width:400px){
+    .nb .nm button{font-size:10px;padding:6px 8px}
+    .panel{padding:12px 8px}
+    .ia-mode-grid{grid-template-columns:repeat(2,1fr)}
   }
   </style>
-  </head>
+    <script src="config.js"></script>
+</head>
   <body>
 
   <!-- ===== AFFICHE D'ACCUEIL ===== -->
@@ -263,6 +388,7 @@
       <button id="tab-vocab-theatre" onclick="nav('vocab-theatre')">Vocabulaire Theatre</button>
       <button id="tab-moyenne" onclick="nav('moyenne')">Moyenne</button>
       <button id="tab-aide" onclick="nav('aide')">Aide</button>
+      <button id="tab-ia" onclick="nav('ia')" style="background:linear-gradient(90deg,#7c3aed,#2563eb);color:#fff;border-radius:6px;font-weight:800">✨ IA</button>
     </div>
   </div>
   <div class="main">
@@ -412,6 +538,66 @@
     <strong>Categorie 2</strong> -- Le vocabulaire du theatre (10 questions)<br>
     <strong>Categorie 3</strong> -- Les types de comique (10 questions)</p>
   </div>
+
+
+  <!-- ===== PANNEAU IA ===== -->
+  <div id="panel-ia" class="panel">
+
+    <div class="ia-header">
+      <div class="ia-badge">✨ Intelligence Artificielle &bull; Powered by Groq</div>
+      <h1>Ton assistant L'Avare</h1>
+      <p>Pose toutes tes questions sur L'Avare et Moli&egrave;re &mdash; l'IA te r&eacute;pond instantan&eacute;ment !</p>
+    </div>
+
+    <!-- Cle API -->
+    <!-- Clé chargée depuis config.js automatiquement -->
+    <div id="ia-key-status" style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:11px 16px;margin-bottom:18px;font-size:13px;color:#166534;font-family:Georgia,serif;display:flex;align-items:center;gap:8px">
+      <span id="ia-key-icon">⏳</span>
+      <span id="ia-key-msg">Chargement de la clé API...</span>
+    </div>
+
+    <!-- Modes -->
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#64748b;margin-bottom:10px">Choisir un mode</div>
+    <div class="ia-mode-grid">
+      <div class="ia-mode-card active" onclick="setMode(this,'avare')" data-mode="avare">
+        <span class="imem">📖</span>
+        <div class="imnm">L'Avare</div>
+        <div class="imsub">Questions sur la pi&egrave;ce</div>
+      </div>
+      <div class="ia-mode-card" onclick="setMode(this,'moliere')" data-mode="moliere">
+        <span class="imem">🎭</span>
+        <div class="imnm">Moli&egrave;re</div>
+        <div class="imsub">Sa vie, son &eacute;poque</div>
+      </div>
+      <div class="ia-mode-card" onclick="setMode(this,'perso')" data-mode="perso">
+        <span class="imem">👥</span>
+        <div class="imnm">Personnages</div>
+        <div class="imsub">Analyse des r&ocirc;les</div>
+      </div>
+      <div class="ia-mode-card" onclick="setMode(this,'revision')" data-mode="revision">
+        <span class="imem">📝</span>
+        <div class="imnm">R&eacute;vision</div>
+        <div class="imsub">Questions de contr&ocirc;le</div>
+      </div>
+    </div>
+
+    <!-- Questions rapides -->
+    <div class="ia-quick" id="ia-quick-btns"></div>
+
+    <!-- Chat -->
+    <div class="ia-chat" id="ia-chat">
+      <div class="ia-msg ai">👋 Bonjour ! Je suis ton assistant pour <strong>L'Avare de Moli&egrave;re</strong>. Entre ta cl&eacute; Groq ci-dessus puis pose-moi toutes tes questions sur la pi&egrave;ce, les personnages ou Moli&egrave;re. Je suis l&agrave; pour t'aider &agrave; r&eacute;viser !</div>
+    </div>
+
+    <!-- Input -->
+    <div class="ia-input-row">
+      <textarea class="ia-input" id="ia-input" rows="2" placeholder="Pose ta question ici..."></textarea>
+      <button class="ia-send" id="ia-send-btn" onclick="sendIA()">Envoyer &#10148;</button>
+    </div>
+    <div class="ia-groq-note">Moli&egrave;re aurait adore l'IA &mdash; mais pas Harpagon, elle co&ucirc;te des tokens 💰</div>
+
+  </div>
+  <!-- ===== FIN PANNEAU IA ===== -->
 
   </div>
   <script>
@@ -1347,6 +1533,267 @@
     'invites':     {label:'Personnages exterieurs', couleur:'#dcfce7'}
   };
 
+
+
+  // ===== IA GROQ + SONS =====
+
+  // --- SONS (Web Audio API) ---
+  var AudioCtx = window.AudioContext || window.webkitAudioContext;
+  var actx = null;
+  function getActx(){ if(!actx) actx = new AudioCtx(); return actx; }
+
+  function playTone(freq, dur, type, vol){
+    try{
+      var ctx = getActx();
+      var osc = ctx.createOscillator();
+      var gain = ctx.createGain();
+      osc.connect(gain); gain.connect(ctx.destination);
+      osc.type = type||'sine';
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(vol||0.18, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + dur);
+      osc.start(); osc.stop(ctx.currentTime + dur);
+    }catch(e){}
+  }
+
+  function sndCorrect(){
+    playTone(523,0.12,'sine',0.2);
+    setTimeout(function(){playTone(659,0.12,'sine',0.2);},100);
+    setTimeout(function(){playTone(784,0.22,'sine',0.22);},200);
+  }
+  function sndWrong(){
+    playTone(300,0.18,'sawtooth',0.15);
+    setTimeout(function(){playTone(220,0.25,'sawtooth',0.12);},160);
+  }
+  function sndClick(){
+    playTone(880,0.07,'sine',0.1);
+  }
+  function sndIASend(){
+    playTone(440,0.08,'sine',0.12);
+    setTimeout(function(){playTone(550,0.1,'sine',0.1);},80);
+  }
+  function sndIAReceive(){
+    playTone(660,0.1,'sine',0.1);
+    setTimeout(function(){playTone(780,0.08,'sine',0.08);},90);
+    setTimeout(function(){playTone(880,0.12,'sine',0.1);},170);
+  }
+  function sndNav(){
+    playTone(600,0.06,'sine',0.08);
+  }
+
+  // Hook sons sur les boutons QCM existants (apres reponse)
+  document.addEventListener('click', function(e){
+    var t = e.target;
+    // sons nav
+    if(t.classList.contains('at') || t.classList.contains('atab') || t.classList.contains('ia-mode-card') || t.classList.contains('acard')){
+      sndNav();
+    }
+  });
+
+  // --- IA GROQ ---
+  // Clé chargée depuis config.js (variable GROQ_API_KEY)
+  var groqKey = (typeof GROQ_API_KEY !== 'undefined' && GROQ_API_KEY && GROQ_API_KEY !== 'mets-ta-cle-groq-ici')
+    ? GROQ_API_KEY
+    : '';
+  var iaMode = 'avare';
+  var iaHistory = [];
+
+  // Affiche le statut de la clé au chargement
+  (function(){
+    var icon = document.getElementById('ia-key-icon');
+    var msg  = document.getElementById('ia-key-msg');
+    var box  = document.getElementById('ia-key-status');
+    if(!icon || !msg || !box) return;
+    if(groqKey){
+      icon.textContent = '✅';
+      msg.textContent  = 'IA prête ! Clé Groq chargée automatiquement.';
+      box.style.background = '#f0fdf4';
+      box.style.borderColor = '#bbf7d0';
+      box.style.color = '#166534';
+    } else {
+      icon.textContent = '⚠️';
+      msg.innerHTML = 'Clé API manquante — ouvre <strong>config.js</strong> et colle ta clé Groq.';
+      box.style.background = '#fff7ed';
+      box.style.borderColor = '#fed7aa';
+      box.style.color = '#92400e';
+    }
+  })();
+
+  var MODES = {
+    avare:   { sys: "Tu es un assistant expert en litterature francaise specialise dans L'Avare de Moliere. Tu aides des eleves de 5e (college) a comprendre la piece. Reponds en francais, de facon claire et adaptee a leur age. Sois precis, donne des exemples de la piece.", quick:["C'est quoi la cassette ?","Pourquoi Harpagon est avare ?","Resumer l'acte I","Quel est le theme principal ?","Qu'est-ce qu'un quiproquo ?","Expliquer le monologue IV.4"] },
+    moliere: { sys: "Tu es un expert de Moliere et du XVIIe siecle. Tu aides des eleves de 5e a connaitre la vie et l'oeuvre de Moliere. Reponds en francais simplement.", quick:["Qui est Moliere ?","Quand a-t-il vecu ?","Pourquoi il ecrivait des comedies ?","Qu'est-ce que la comedie-ballet ?","Comment etait le theatre au XVIIe s ?","Autres pieces de Moliere ?"] },
+    perso:   { sys: "Tu es un expert des personnages de L'Avare de Moliere. Tu analyses les roles, les relations et les motivations de chaque personnage pour des eleves de 5e. Reponds en francais.", quick:["Decris Harpagon","Qui est La Fleche ?","Pourquoi Valere flatte-t-il ?","Maitre Jacques : role comique ?","Anselme : le bon pere ?","Frosine est-elle mechante ?"] },
+    revision:{ sys: "Tu es un professeur qui fait reviser L'Avare de Moliere a des eleves de 5e. Pose des questions de controle adaptees, corriges les reponses et expliques les erreurs avec bienveillance. Reponds en francais.", quick:["Pose-moi une question","Question sur l'acte II","Teste mes connaissances sur les personnages","Question difficile","Verifier cette reponse : ...","Explication du denouement"] }
+  };
+
+  // saveGroqKey() supprimé — clé dans config.js
+
+  function setMode(el, mode){
+    document.querySelectorAll('.ia-mode-card').forEach(function(c){c.classList.remove('active');});
+    el.classList.add('active');
+    iaMode = mode;
+    iaHistory = [];
+    renderQuickBtns();
+    var chat = document.getElementById('ia-chat');
+    chat.innerHTML = '<div class="ia-msg ai">Mode change ! Je suis maintenant en mode <strong>' + el.querySelector('.imnm').textContent + '</strong>. Pose ta question !</div>';
+    sndNav();
+  }
+
+  function renderQuickBtns(){
+    var qs = MODES[iaMode].quick;
+    var h = '';
+    qs.forEach(function(q){
+      h += '<button onclick="quickQ(this)">' + q + '</button>';
+    });
+    document.getElementById('ia-quick-btns').innerHTML = h;
+  }
+
+  function quickQ(btn){
+    document.getElementById('ia-input').value = btn.textContent;
+    sendIA();
+  }
+
+  async function sendIA(){
+    if(!groqKey){
+      alert("Clé API manquante !\n\nOuvre le fichier config.js et remplace\n\'mets-ta-cle-groq-ici\'\npar ta vraie clé Groq (gsk_...)");
+      return;
+    }
+    var inp = document.getElementById('ia-input');
+    var msg = inp.value.trim();
+    if(!msg) return;
+    inp.value = '';
+
+    var chat = document.getElementById('ia-chat');
+    var sendBtn = document.getElementById('ia-send-btn');
+
+    // Affiche message user
+    chat.innerHTML += '<div class="ia-msg user">' + escHTML(msg) + '</div>';
+    var loadDiv = document.createElement('div');
+    loadDiv.className = 'ia-msg loading';
+    loadDiv.textContent = '✍️ L\'IA réfléchit...';
+    chat.appendChild(loadDiv);
+    chat.scrollTop = chat.scrollHeight;
+    sendBtn.disabled = true;
+    sndIASend();
+
+    // Build messages
+    iaHistory.push({role:'user', content: msg});
+    var messages = [{role:'system', content: MODES[iaMode].sys}].concat(iaHistory.slice(-8));
+
+    try {
+      var resp = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + groqKey
+        },
+        body: JSON.stringify({
+          model: 'llama3-70b-8192',
+          messages: messages,
+          max_tokens: 600,
+          temperature: 0.7
+        })
+      });
+
+      if(!resp.ok){
+        var err = await resp.json();
+        throw new Error(err.error && err.error.message ? err.error.message : 'Erreur API ' + resp.status);
+      }
+
+      var data = await resp.json();
+      var reply = data.choices[0].message.content;
+      iaHistory.push({role:'assistant', content: reply});
+
+      loadDiv.remove();
+      var aiDiv = document.createElement('div');
+      aiDiv.className = 'ia-msg ai';
+      aiDiv.innerHTML = formatIAReply(reply);
+      chat.appendChild(aiDiv);
+      chat.scrollTop = chat.scrollHeight;
+      sndIAReceive();
+
+    } catch(e) {
+      loadDiv.remove();
+      var errDiv = document.createElement('div');
+      errDiv.className = 'ia-msg ai';
+      errDiv.innerHTML = '❌ <strong>Erreur :</strong> ' + escHTML(e.message) + '<br><small>Verifie ta cle API Groq.</small>';
+      chat.appendChild(errDiv);
+      sndWrong();
+    }
+
+    sendBtn.disabled = false;
+  }
+
+  function escHTML(s){
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function formatIAReply(txt){
+    // basic markdown-ish formatting
+    txt = escHTML(txt);
+    txt = txt.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    txt = txt.replace(/\*(.*?)\*/g, '<em>$1</em>');
+    txt = txt.replace(/\n\n/g, '</p><p style="margin:6px 0">');
+    txt = txt.replace(/\n/g, '<br>');
+    return '<p style="margin:0">' + txt + '</p>';
+  }
+
+  // Enter to send
+  document.getElementById('ia-input').addEventListener('keydown', function(e){
+    if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); sendIA(); }
+  });
+
+  // Init IA
+  renderQuickBtns();
+
+  // Hook sons sur QCM (correct/wrong) - patch mv() pour ajouter son
+  var _origMv = typeof mv === 'function' ? mv : null;
+
+  // Son sur clic reponse QCM
+  document.addEventListener('click', function(e){
+    var btn = e.target.closest('.sopt');
+    if(btn && btn.dataset.v){
+      var isCorrect = btn.classList.contains('ok') || btn.style.background.includes('16a34a') || btn.dataset.correct === 'true';
+      // On hookera apres la reponse
+    }
+  });
+
+
+
+  // ===== DETECTION APPAREIL =====
+  (function(){
+    var w = window.innerWidth;
+    var ua = navigator.userAgent;
+    var isMobile = w <= 768 || /Android|iPhone|iPad|iPod/i.test(ua);
+    var isTablet = (w > 768 && w <= 1024) || /iPad|Android(?!.*Mobile)/i.test(ua);
+    var type = isMobile ? (isTablet ? 'tablette' : 'telephone') : 'ordinateur';
+    var icons = {telephone:'📱', tablette:'📲', ordinateur:'🖥️'};
+
+    // Toast
+    var toast = document.createElement('div');
+    toast.style.cssText = [
+      'position:fixed','bottom:90px','left:50%','transform:translateX(-50%)',
+      'background:#1e293b','color:#fff','padding:8px 18px','border-radius:20px',
+      'font-size:12px','font-family:Georgia,serif','z-index:9998',
+      'box-shadow:0 4px 16px rgba(0,0,0,.3)','opacity:0',
+      'transition:opacity .4s','pointer-events:none','white-space:nowrap'
+    ].join(';');
+    toast.textContent = icons[type] + ' Interface ' + type + ' activée';
+    document.body.appendChild(toast);
+
+    // Ajuste position toast selon device (si mobile, nav est en bas)
+    if(isMobile) toast.style.bottom = '90px';
+    else toast.style.bottom = '24px';
+
+    setTimeout(function(){ toast.style.opacity='1'; }, 600);
+    setTimeout(function(){ toast.style.opacity='0'; }, 3200);
+    setTimeout(function(){ toast.remove(); }, 3700);
+
+    // Sur mobile : ajuste le padding-bottom du body
+    if(isMobile){
+      document.body.style.paddingBottom = '80px';
+    }
+  })();
 
   // ===== AFFICHE =====
   function fermerAffiche() {
