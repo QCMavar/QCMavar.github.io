@@ -9,7 +9,7 @@
 //
 // ============================================================
 
-var GROQ_API_KEY = "mets-ta-cle-groq-ici";
+var GROQ_API_KEY = "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";
 
 // ============================================================
 //  NE PAS PARTAGER CE FICHIER PUBLIQUEMENT si la clé est dedans
