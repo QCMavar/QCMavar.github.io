@@ -88,6 +88,114 @@
   .pb{background:var(--ok);height:100%;transition:width .4s}
   .sec-sep{border-top:2px solid var(--bdr);margin:28px 0 22px;padding-top:22px}
   .sec-lbl{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#64748b;margin-bottom:12px}
+
+  .pcard{border:2px solid #0f172a;border-radius:12px;padding:18px 12px;text-align:center;cursor:pointer;transition:all .2s;background:#fff;position:relative;overflow:hidden}
+  .pcard:hover{background:#0f172a;color:#fff;transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.15)}
+  .pcard .pemoji{font-size:32px;display:block;margin-bottom:8px}
+  .pcard .pnom{font-weight:800;font-size:14px;display:block;margin-bottom:3px}
+  .pcard .prole{font-size:11px;opacity:.65;line-height:1.3}
+  .pcard .pfamille{position:absolute;top:6px;right:6px;font-size:9px;font-weight:700;padding:2px 7px;border-radius:8px;background:#dbeafe;color:#1e40af}
+  .pcard:hover .pfamille{background:rgba(255,255,255,.2);color:#fff}
+  /* tree */
+  .ftree{font-family:Georgia,serif;text-align:center}
+  .ftree .fgen{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin:6px 0}
+  .ftree .fnode{display:flex;flex-direction:column;align-items:center;cursor:pointer}
+  .ftree .fbox{border:2px solid #0f172a;border-radius:8px;padding:8px 14px;background:#fff;font-weight:700;font-size:13px;transition:all .18s;min-width:100px;text-align:center}
+  .ftree .fbox:hover{background:#0f172a;color:#fff}
+  .ftree .fbox .femoji{font-size:20px;display:block;margin-bottom:2px}
+  .ftree .fbox small{font-weight:400;font-size:10px;display:block;opacity:.7;margin-top:1px}
+  .ftree .fline{width:2px;height:20px;background:#0f172a;margin:0 auto}
+  .ftree .fhline{border-top:2px solid #0f172a;margin:0 8px}
+  .ftree .flabel{font-size:10px;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin:4px 0 2px}
+  .ftree .fgroup{border:1px dashed #94a3b8;border-radius:10px;padding:10px 16px;margin:4px}
+  .ftree .fgroup-lbl{font-size:9px;color:#94a3b8;font-weight:700;text-transform:uppercase;margin-bottom:6px}
+
+  /* ===== AFFICHE POPUP ===== */
+  #affiche-overlay {
+    position:fixed;inset:0;z-index:9999;
+    display:flex;align-items:center;justify-content:center;
+    padding:20px;
+    background:rgba(0,0,0,0.72);
+    backdrop-filter:blur(3px);
+    animation:fadeInOverlay .5s ease;
+  }
+  @keyframes fadeInOverlay{from{opacity:0}to{opacity:1}}
+
+  #affiche-box {
+    position:relative;
+    background:#fff;
+    border-radius:16px;
+    max-width:460px;width:100%;
+    box-shadow:0 30px 80px rgba(0,0,0,.45);
+    overflow:hidden;
+    animation:slideUp .45s cubic-bezier(.22,.68,0,1.2);
+  }
+  @keyframes slideUp{from{transform:translateY(40px);opacity:0}to{transform:translateY(0);opacity:1}}
+
+  #affiche-close {
+    position:absolute;top:12px;right:12px;
+    width:32px;height:32px;border-radius:50%;
+    background:rgba(0,0,0,.12);border:none;cursor:pointer;
+    font-size:18px;line-height:32px;text-align:center;color:#1e293b;
+    transition:background .15s;
+    font-family:sans-serif;
+    display:flex;align-items:center;justify-content:center;
+    z-index:2;
+  }
+  #affiche-close:hover{background:rgba(0,0,0,.22);color:#fff;}
+
+  #affiche-header {
+    background:linear-gradient(135deg,#7f1d1d 0%,#1e3a8a 100%);
+    padding:32px 28px 24px;
+    text-align:center;
+    color:#fff;
+  }
+  #affiche-header .ah-logo {font-size:48px;margin-bottom:10px;display:block;}
+  #affiche-header h2 {
+    font-size:20px;font-weight:800;margin:0 0 6px;
+    font-family:Georgia,serif;letter-spacing:.5px;
+  }
+  #affiche-header .ah-sub {
+    font-size:13px;opacity:.82;font-family:Georgia,serif;font-style:italic;
+  }
+
+  #affiche-body {padding:24px 28px 20px;}
+
+  .affiche-badge {
+    display:inline-flex;align-items:center;gap:6px;
+    background:#f1f5f9;border:1px solid #e2e8f0;border-radius:8px;
+    padding:7px 13px;font-size:13px;font-weight:600;color:#1e293b;
+    font-family:Georgia,serif;
+  }
+  .affiche-badge .abem {font-size:17px;}
+
+  #affiche-body .af-text {
+    font-size:14px;line-height:1.75;color:#334155;
+    font-family:Georgia,serif;margin:14px 0;
+  }
+
+  #affiche-body .af-merci {
+    background:linear-gradient(135deg,#fef9e7,#fef3c7);
+    border:1px solid #fde68a;border-radius:10px;
+    padding:13px 16px;text-align:center;
+    font-size:14px;color:#92400e;font-family:Georgia,serif;
+    font-style:italic;
+  }
+
+  #affiche-body .af-btn {
+    display:block;width:100%;margin-top:18px;
+    padding:13px;text-align:center;
+    background:#0f172a;color:#fff;border:none;border-radius:9px;
+    font-size:14px;font-weight:700;font-family:Georgia,serif;
+    cursor:pointer;transition:background .18s;
+  }
+  #affiche-body .af-btn:hover{background:#1e3a8a;}
+
+  .af-bug {
+    font-size:11px;color:#94a3b8;text-align:center;
+    margin-top:10px;font-family:Georgia,serif;
+  }
+
   @media(max-width:640px){
     .nb{padding:0 14px;height:auto;flex-direction:column;padding:10px 14px;gap:8px}
     .nb .nm{flex-wrap:wrap;justify-content:center}
@@ -99,11 +207,58 @@
   </style>
   </head>
   <body>
+
+  <!-- ===== AFFICHE D'ACCUEIL ===== -->
+  <div id="affiche-overlay">
+    <div id="affiche-box">
+
+      <button id="affiche-close" onclick="fermerAffiche()" title="Fermer">✕</button>
+
+      <div id="affiche-header">
+        <span class="ah-logo">📖</span>
+        <h2>L'Avare &mdash; Moli&egrave;re</h2>
+        <div class="ah-sub">QCM interactif &bull; 5 actes &bull; 350 questions</div>
+      </div>
+
+      <div id="affiche-body">
+
+        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:4px">
+          <div class="affiche-badge"><span class="abem">👦</span> Tom</div>
+          <div class="affiche-badge" style="font-size:13px;color:#94a3b8">&amp;</div>
+          <div class="affiche-badge"><span class="abem">👦</span> Yann</div>
+        </div>
+
+        <p class="af-text">
+          Ce site a &eacute;t&eacute; cr&eacute;&eacute; par <strong>Tom et Yann</strong> pour vous aider &agrave;
+          r&eacute;viser <em>L'Avare</em> de Moli&egrave;re.
+          Vous y trouverez les fiches de cours, les personnages,
+          le vocabulaire du th&eacute;&acirc;tre et des centaines de questions QCM
+          pour vous entra&icirc;ner avant le contr&ocirc;le.
+        </p>
+
+        <div class="af-merci">
+          🙏 &nbsp;Merci de votre soutien &agrave; tous !&nbsp; 🙏
+        </div>
+
+        <p class="af-bug">
+          Un bug ? Un probl&egrave;me ? N'h&eacute;sitez pas &agrave; nous le signaler !
+        </p>
+
+        <button class="af-btn" onclick="fermerAffiche()">
+          Commencer le QCM &rarr;
+        </button>
+
+      </div>
+    </div>
+  </div>
+  <!-- ===== FIN AFFICHE ===== -->
+
   <div class="nb">
     <div class="logo" onclick="nav('accueil')">Moliere -- L'Avare (Piece Complete)</div>
     <div class="nm">
       <button id="tab-accueil" class="at" onclick="nav('accueil')">Accueil</button>
       <button id="tab-lecons" onclick="nav('lecons')">Lecons</button>
+      <button id="tab-personnages" onclick="nav('personnages')">Personnages</button>
       <button id="tab-qcm" onclick="nav('qcm')">QCM</button>
       <button id="tab-vocab-theatre" onclick="nav('vocab-theatre')">Vocabulaire Theatre</button>
       <button id="tab-moyenne" onclick="nav('moyenne')">Moyenne</button>
@@ -126,6 +281,33 @@
       <div class="dcard" onclick="nav('qcm')"><h3>Series d'Evaluations</h3><p style="font-size:13px;color:#64748b;margin:0">350 questions notees sur 20 avec correction instantanee, classees par acte.</p></div>
       <div class="dcard" onclick="nav('vocab-theatre')"><h3>Vocabulaire Theatre</h3><p style="font-size:13px;color:#64748b;margin:0">3 categories de vocabulaire : parties du theatre, termes dramaturgiques, types de comique.</p></div>
       <div class="dcard" onclick="nav('moyenne')"><h3>Tableau de Bord</h3><p style="font-size:13px;color:#64748b;margin:0">Suivez votre progression et votre moyenne generale toutes evaluations confondues.</p></div>
+    </div>
+  </div>
+
+
+  <!-- PERSONNAGES -->
+  <div id="panel-personnages" class="panel">
+    <h1>Les Personnages de L'Avare</h1>
+    <p style="font-size:14px;color:#64748b;margin-bottom:20px">Clique sur un personnage pour en savoir plus sur lui !</p>
+
+    <!-- Arbre de famille SVG -->
+    <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:24px;margin-bottom:28px;overflow-x:auto">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#64748b;margin-bottom:16px;text-align:center">Arbre de la famille Harpagon</div>
+      <div id="famille-tree" style="min-width:320px"></div>
+    </div>
+
+    <!-- Grille des personnages cliquables -->
+    <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:#64748b;margin-bottom:12px">Fiche de chaque personnage</div>
+    <div id="perso-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px;margin-bottom:28px"></div>
+
+    <!-- Modale fiche personnage -->
+    <div id="perso-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:999;align-items:center;justify-content:center;padding:16px">
+      <div style="background:#fff;border-radius:14px;max-width:520px;width:100%;max-height:88vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.25)">
+        <div id="perso-modal-inner" style="padding:28px"></div>
+        <div style="padding:0 28px 20px;text-align:right">
+          <button onclick="closePerso()" style="padding:8px 22px;background:#0f172a;color:#fff;border:none;border-radius:6px;font-weight:700;cursor:pointer;font-family:Georgia,serif">Fermer</button>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -1009,7 +1191,343 @@
   function tgD(el){document.getElementById(el.dataset.id).classList.toggle('open');}
   function resetScores(){if(confirm('Effacer toutes vos notes ?')){try{localStorage.removeItem('lav3');}catch(e){}scores={};renderM();}}
 
-  // ===== INIT =====
+
+  // ===== PERSONNAGES =====
+  const PERSOS = [
+    {
+      id:'harpagon', nom:'Harpagon', emoji:'💰', role:'Le vieux riche radin', famille:'famille', couleur:'#7f1d1d',
+      intro:"Harpagon est le personnage principal de la piece. C'est un vieux bourgeois tres riche qui refuse absolument de depenser son argent, meme pour nourrir ou habiller correctement ses enfants. Il est tellement avare qu'il prefere laisser ses chevaux mourir de faim plutot que de payer du fourrage. Son tresor ? Une cassette (une boite fermee a cle) pleine de dix mille ecus d'or, enterree dans son jardin et surveillee comme un tresor de pirate.",
+      relations:[
+        "Il est le <strong>pere</strong> de Cleante et d'Elise, mais il se comporte plutot comme un tyran que comme un papa.",
+        "Il est <strong>rival amoureux de son propre fils</strong> : tous les deux veulent epouser Mariane. C'est a la fois grotesque et cruel.",
+        "Il veut marier Elise au vieux <strong>Anselme</strong> uniquement parce qu'Anselme n'exige pas de dot (pas d'argent en echange).",
+        "Il emploie <strong>Valere</strong> comme intendant, sans savoir que Valere le trompe pour rester pres d'Elise."
+      ],
+      actes:[
+        {acte:"Acte I", resume:"Harpagon annonce ses projets : Cleante epousera une veuve riche, Elise le vieux Anselme sans dot, et lui-meme epousera la jeune Mariane. Tout le monde est horrifie, personne n'ose le dire."},
+        {acte:"Acte IV", resume:"Il decouvre que sa cassette est volee et perd completement la raison. Son monologue est le plus celebre de la piece : il accuse tout le monde, s'attrape lui-meme le bras, et finit par apostropher les spectateurs dans la salle."},
+        {acte:"Acte V", resume:"Il consent aux mariages uniquement contre la restitution de sa cassette. Sa derniere phrase, pendant que tout le monde fete les mariages : 'Et moi, voir ma chere cassette.' Il n'a rien appris."}
+      ],
+      citation:"Au voleur ! Au voleur ! A l'assassin ! Au meurtrier ! Justice, juste Ciel !",
+      anecdote:"Le nom 'Harpagon' vient du grec 'harpax' qui veut dire 'celui qui s'empare de tout'. En francais, on dit encore aujourd'hui 'c'est un vrai harpagon' pour qualifier quelqu'un d'extremement radin. Moliere a rendu ce personnage si fort que son nom est entre dans la langue francaise !"
+    },
+    {
+      id:'cleante', nom:'Cleante', emoji:'💘', role:'Le fils rebelle et amoureux', famille:'famille', couleur:'#1e3a8a',
+      intro:"Cleante est le fils d'Harpagon. Jeune et amoureux, il est fou de Mariane, une fille pauvre mais douce. Probleme : son pere lui refuse tout argent pour vivre. Alors il emprunte en secret a des usuriers (des preteurs qui font payer des interets enormes). Et quand il decouvre que l'usurier qui l'exploite, c'est son propre pere sous un prenom cache... l'affrontement est inevitable.",
+      relations:[
+        "Il est le <strong>fils</strong> d'Harpagon et supporte de moins en moins ses ordres injustes.",
+        "Il aime <strong>Mariane</strong> mais son pere veut la meme femme pour lui. Rivalite totale.",
+        "Il est solidaire de sa <strong>soeur Elise</strong> : ensemble, ils resistent a leur pere.",
+        "<strong>La Fleche</strong>, son valet fidele, va voler la cassette pour lui donner une arme contre Harpagon."
+      ],
+      actes:[
+        {acte:"Acte II", resume:"Il decouvre que l'usurier qui lui propose un contrat abusif, c'est Harpagon lui-meme deguise sous un intermediaire. La confrontation est explosive et comique."},
+        {acte:"Acte III", resume:"Pour montrer son amour a Mariane devant son pere, il lui offre la bague et le bouquet qu'Harpagon lui avait destines. Harpagon enrage mais ne peut rien dire en public."},
+        {acte:"Acte V", resume:"Il negocie directement : il rendra la cassette en echange de l'autorisation d'epouser Mariane. C'est le seul langage qu'Harpagon comprend."}
+      ],
+      citation:"Je prefere etre pauvre avec celle que j'aime plutot que riche avec quelqu'un que je n'aime pas.",
+      anecdote:"Cleante est le 'jeune premier' classique de la comedie : beau, amoureux, en rebellion contre l'autorite injuste. Mais Moliere ne le rend pas parfait : il est aussi imprudent et parfois naif, ce qui le rend plus humain et plus drole."
+    },
+    {
+      id:'elise', nom:'Elise', emoji:'🌹', role:'La fille qui dit non', famille:'famille', couleur:'#9d174d',
+      intro:"Elise est la fille d'Harpagon. Elle aime Valere, l'intendant de son pere, qui lui a sauve la vie lors d'une noyade. Leur amour est secret. La situation devient urgente quand Harpagon lui annonce qu'elle doit epouser de force le vieux Anselme, uniquement parce qu'il n'exige pas de dot. Elise refuse. Au XVIIe siecle, c'est un acte de resistance vraiment courageux pour une jeune fille.",
+      relations:[
+        "Elle est la <strong>fille</strong> d'Harpagon et resiste a ses ordres sans violence mais avec fermete.",
+        "Elle aime <strong>Valere</strong> qui l'a sauvee de la noyade. Ils se voient en cachette.",
+        "Elle fait front avec son <strong>frere Cleante</strong> contre les projets de leur pere."
+      ],
+      actes:[
+        {acte:"Acte I", resume:"Valere lui conseille de flatter son pere pour survivre dans cette maison. Elle comprend mais trouve ca difficile."},
+        {acte:"Acte I", resume:"Quand Harpagon lui annonce le mariage force avec Anselme, elle dit clairement non. Son pere n'en revient pas."},
+        {acte:"Acte V", resume:"Valere revele qu'il est le fils d'Anselme. Elise peut enfin epouser l'homme qu'elle aime, avec la benediction de son propre beau-pere."}
+      ],
+      citation:"Comment pouvez-vous vouloir que je me marie avec un homme que je ne connais pas ?",
+      anecdote:"Au XVIIe siecle, les filles devaient obeir totalement a leur pere pour le mariage. Refuser, c'etait presque impensable. Moliere montre qu'Elise a raison de refuser, et que l'autorite du pere peut etre injuste."
+    },
+    {
+      id:'valere', nom:'Valere', emoji:'🎭', role:"L'intendant qui joue un role", famille:'invites', couleur:'#14532d',
+      intro:"Valere est un jeune noble napolitain qui a sauve Elise de la noyade. Pour rester pres d'elle, il s'est fait engager chez Harpagon sous un faux nom comme intendant (chef des domestiques). Sa methode pour survivre dans cette maison : flatter Harpagon sans arret, approuver tout ce qu'il dit, meme quand c'est absurde. Ca marche... mais est-ce vraiment honnete ?",
+      relations:[
+        "Il aime <strong>Elise</strong> et a tout sacrifie pour rester pres d'elle.",
+        "Il flatte <strong>Harpagon</strong> sans cesse : c'est une strategie, pas de la sincerite.",
+        "Il est en opposition silencieuse avec <strong>Maitre Jacques</strong> : Jacques dit la verite et se fait battre, Valere flatte et reussit."
+      ],
+      actes:[
+        {acte:"Acte I", resume:"Il explique a Elise que flatter son pere est la seule facon de rester dans la maison et de la proteger."},
+        {acte:"Acte III", resume:"Il approuve avec enthousiasme les choix culinaires ridicules d'Harpagon (repas infames a prix de misere). Harpagon le trouve 'd'une grande sagesse'. Scene tres comique."},
+        {acte:"Acte V", resume:"Il revele sa vraie identite : il est le fils du seigneur Thomas d'Alburci, c'est-a-dire le fils d'Anselme. Il peut enfin epouser Elise officiellement."}
+      ],
+      citation:"Il faut savoir s'adapter a ceux dont on depend, meme si cela blesse un peu l'amour-propre.",
+      anecdote:"Valere pose une vraie question morale : a-t-on le droit de mentir et de se soumettre pour proteger quelqu'un qu'on aime ? Moliere ne repond pas directement. C'est au spectateur (et a vous !) de decider."
+    },
+    {
+      id:'mariane', nom:'Mariane', emoji:'🌸', role:'La jeune fille prise au piege', famille:'invites', couleur:'#7e22ce',
+      intro:"Mariane est une jeune fille pauvre qui vit avec sa mere malade. Elle est douce et sincere. Elle est amoureuse de Cleante. Mais la situation tourne au cauchemar quand elle decouvre que le vieillard qu'on veut lui faire epouser de force... c'est le propre pere de l'homme qu'elle aime ! Elle doit sourire poliment a cet homme tout en cachant son horreur.",
+      relations:[
+        "Elle aime <strong>Cleante</strong> mais ne peut pas l'epouser a cause des plans d'Harpagon.",
+        "Elle rencontre <strong>Harpagon</strong> comme futur mari impose. La rencontre est un supplice poli.",
+        "Elle decouvre a la fin qu'elle est la <strong>fille d'Anselme</strong>, ce qui denoue tout d'un coup."
+      ],
+      actes:[
+        {acte:"Acte III", resume:"Elle rencontre Harpagon officiellement. Elle dissimule parfaitement son horreur derriere un sourire de facade. C'est a la fois comique et triste."},
+        {acte:"Acte IV", resume:"Elle cherche avec Cleante, Elise et Frosine un moyen de se debarrasser des projets d'Harpagon."},
+        {acte:"Acte V", resume:"Elle apprend qu'elle est la fille d'Anselme. Elle peut epouser Cleante avec l'accord de son propre pere retrouve."}
+      ],
+      citation:"Je n'imaginais pas que mon futur mari impose serait le pere de l'homme que j'aime.",
+      anecdote:"Mariane est la victime la plus innocente de l'avarice d'Harpagon. Belle, pauvre, obligee de sourire a quelqu'un qu'elle ne veut pas epouser. Moliere la traite avec beaucoup de douceur et de sympathie."
+    },
+    {
+      id:'frosine', nom:'Frosine', emoji:'🎪', role:'La marieuse maligne', famille:'invites', couleur:'#92400e',
+      intro:"Frosine est une femme qui gagne sa vie en arrangeant des mariages et en rendant des services aux gens riches. Elle est vive, bavarde, habile et toujours prete a tout pour de l'argent. C'est elle qui a convaincu Harpagon d'epouser Mariane et qui organise leur rencontre. Elle essaie de se faire payer... mais Harpagon refuse de sortir une seule piece de sa poche !",
+      relations:[
+        "Elle travaille pour <strong>Harpagon</strong> : elle lui trouve une femme, mais il ne la paie pas.",
+        "Elle aide aussi les <strong>jeunes</strong> en cherchant des solutions, par interet mais pas sans bonte.",
+        "Elle est l'organisatrice de la rencontre entre <strong>Harpagon et Mariane</strong>."
+      ],
+      actes:[
+        {acte:"Acte II", resume:"Elle flatte Harpagon de maniere exageree pour lui soutirer de l'argent. Il l'ecoute avec plaisir... et ne lui donne absolument rien."},
+        {acte:"Acte III", resume:"Elle organise et gere la premiere rencontre entre Harpagon et Mariane. Exercice de haute diplomatie."},
+        {acte:"Acte IV", resume:"Elle propose un plan audacieux : trouver une fausse heritiere riche pour detourner Harpagon de Mariane."}
+      ],
+      citation:"Il n'est au monde de pire radin que monsieur votre pere.",
+      anecdote:"Frosine dit souvent la verite sur Harpagon en aparte (c'est-a-dire en chuchotant pour que seul le public entende). C'est une figure comique classique : l'entremetteuse cynique mais lucide, qui dit ce que tout le monde pense tout bas."
+    },
+    {
+      id:'maitre-jacques', nom:'Maitre Jacques', emoji:'👨‍🍳', role:'Le cuisinier qui dit la verite', famille:'domestiques', couleur:'#7c3aed',
+      intro:"Maitre Jacques cumule deux metiers : cocher (il s'occupe des chevaux) et cuisinier. Ses conditions de travail sont impossibles : les chevaux sont sous-alimentes, et le budget cuisine est si ridicule qu'il ne peut rien preparer de correct. Son grand malheur ? Il dit toujours la verite. Et dans la maison d'Harpagon, ca lui vaut regulierement des coups de baton.",
+      relations:[
+        "Il travaille pour <strong>Harpagon</strong> mais se fait battre chaque fois qu'il dit la verite.",
+        "Il deteste <strong>Valere</strong> qui a pris sa place dans le coeur du maitre en le flattant.",
+        "Son faux temoignage contre Valere (par vengeance) lui coutera cher a la fin."
+      ],
+      actes:[
+        {acte:"Acte III", resume:"Il dit franchement a Harpagon que ses chevaux meurent de faim et que le voisinage se moque de lui. Recompense : des coups. Puis Valere approuve tout et devient le prefere du maitre. La lecon est amere."},
+        {acte:"Acte III-IV", resume:"Sa veste reversible (cocher d'un cote, cuisinier de l'autre) est devenue une image celebre : 'retourner sa veste' selon les situations."},
+        {acte:"Acte V", resume:"Il designe faussement Valere comme le voleur de la cassette, par vengeance. Ce mensonge le condamne lui-meme au denouement."}
+      ],
+      citation:"Puisque vous le voulez, monsieur, je vous dirai la verite : on se moque de vous dans tout le quartier.",
+      anecdote:"L'expression 'retourner sa veste' (changer d'opinion selon les circonstances) vient directement de la veste reversible de Maitre Jacques dans L'Avare. Une expression inventee par Moliere qui s'utilise encore aujourd'hui !"
+    },
+    {
+      id:'la-fleche', nom:'La Fleche', emoji:'🏹', role:'Le valet fidele et malin', famille:'domestiques', couleur:'#0369a1',
+      intro:"La Fleche est le valet personnel de Cleante. Son nom dit tout : il est rapide, discret et habile. Des le debut, Harpagon le soupçonne de tout et le fouille sans raison. Mais La Fleche se venge bien : c'est lui qui repere ou Harpagon a cache sa cassette, et c'est lui qui la vole pour donner a Cleante une arme decisive contre son pere.",
+      relations:[
+        "Il est entierement devoue a <strong>Cleante</strong>, son maitre et ami.",
+        "Il est l'ennemi naturel d'<strong>Harpagon</strong> qui le surveille et le fouille sans raison.",
+        "C'est lui qui realise le coup de theatre central : le <strong>vol de la cassette</strong>."
+      ],
+      actes:[
+        {acte:"Acte I", resume:"Harpagon le fouille sans raison. En cherchant a cacher sa cassette, Harpagon la revele involontairement. Comique de situation parfait."},
+        {acte:"Acte II", resume:"Il lit a voix haute les conditions monstrueuses du contrat de pret de l'usurier (qui est en fait Harpagon)."},
+        {acte:"Acte IV", resume:"Il apporte la cassette volee a Cleante. C'est le moment qui renverse tout le rapport de force entre pere et fils."}
+      ],
+      citation:"Voila, monsieur, de quoi traiter d'egal a egal avec votre pere.",
+      anecdote:"La Fleche appartient a la grande lignee des 'valets malins' de la comedie, qu'on retrouve depuis l'Antiquite romaine jusqu'a Figaro de Beaumarchais. Ces valets sont souvent plus debrouillards que leurs maitres et trouvent les vraies solutions."
+    },
+    {
+      id:'anselme', nom:'Anselme', emoji:'👴', role:'Le bon vieillard au secret', famille:'invites', couleur:'#065f46',
+      intro:"Anselme est d'abord presente comme le vieux riche qu'Harpagon veut faire epouser a Elise. Il accepte sans exiger de dot. Tout le monde croit que c'est un vieillard ordinaire. Mais a l'acte V, on decouvre la verite : il est le seigneur Thomas d'Alburci, un noble napolitain qui croyait toute sa famille morte dans un naufrage seize ans plus tot. Et ses enfants retrouves sont... Valere et Mariane !",
+      relations:[
+        "Il est le <strong>vrai pere</strong> de Valere ET de Mariane (revelation finale).",
+        "Il devait epouser <strong>Elise</strong> mais devient son beau-pere.",
+        "Il est l'exact contraire d'<strong>Harpagon</strong> : genereux la ou l'autre est avare."
+      ],
+      actes:[
+        {acte:"Acte I", resume:"Presente comme futur mari d'Elise. Il accepte sans dot, ce qui ravit Harpagon et horrifie Elise."},
+        {acte:"Acte V", resume:"Il revele etre Thomas d'Alburci. En quelques instants, il retrouve ses deux enfants perdus. Bouleverse, il offre de payer lui-meme les frais des deux mariages."}
+      ],
+      citation:"Ciel ! Valere, mon fils ! Mariane, ma fille ! Quelle joie apres tant d'annees !",
+      anecdote:"C'est Anselme qui paye pour tout le monde a la fin. Moliere le fait expres : la paix ne vient pas du repentir d'Harpagon, mais de l'argent genereux d'un autre. Critique discrete mais tres efficace de l'avarice."
+    }
+  ];
+
+  const FAMILLE_GROUPS = {
+    'famille':     {label:'Famille Harpagon',      couleur:'#fee2e2'},
+    'domestiques': {label:'Les domestiques',        couleur:'#fef9c3'},
+    'invites':     {label:'Personnages exterieurs', couleur:'#dcfce7'}
+  };
+
+
+  // ===== AFFICHE =====
+  function fermerAffiche() {
+    var o = document.getElementById('affiche-overlay');
+    if (!o) return;
+    o.style.transition = 'opacity .3s';
+    o.style.opacity = '0';
+    setTimeout(function(){ o.style.display = 'none'; }, 300);
+  }
+  // Fermer si clic sur overlay (hors box)
+  document.getElementById('affiche-overlay').addEventListener('click', function(e){
+    if (e.target === this) fermerAffiche();
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') fermerAffiche();
+  });
+
+  // ===== ARBRE SVG INTERACTIF =====
+  function buildFamilleTree() {
+    var nodes = [
+      {id:'harpagon',      x:440, y:60,  emoji:'💰', nom:'Harpagon',     sous:'Le pere avare',       bg:'#7f1d1d', tx:'#fff'},
+      {id:'cleante',       x:200, y:190, emoji:'💘', nom:'Cleante',      sous:'Fils',                bg:'#1e3a8a', tx:'#fff'},
+      {id:'elise',         x:680, y:190, emoji:'🌹', nom:'Elise',        sous:'Fille',               bg:'#9d174d', tx:'#fff'},
+      {id:'mariane',       x:60,  y:330, emoji:'🌸', nom:'Mariane',      sous:'Amoureuse de Cleante',bg:'#7e22ce', tx:'#fff'},
+      {id:'valere',        x:820, y:330, emoji:'🎭', nom:'Valere',       sous:'Amoureux d\'Elise',   bg:'#14532d', tx:'#fff'},
+      {id:'anselme',       x:440, y:360, emoji:'👴', nom:'Anselme',      sous:'Pere secret (acte V)',bg:'#065f46', tx:'#fff'},
+      {id:'frosine',       x:60,  y:190, emoji:'🎪', nom:'Frosine',      sous:'La marieuse',         bg:'#92400e', tx:'#fff'},
+      {id:'la-fleche',     x:200, y:440, emoji:'🏹', nom:'La Fleche',    sous:'Valet de Cleante',    bg:'#0369a1', tx:'#fff'},
+      {id:'maitre-jacques',x:680, y:440, emoji:'👨‍🍳', nom:'M. Jacques',  sous:'Cuisinier-cocher',   bg:'#7c3aed', tx:'#fff'},
+    ];
+    var liens = [
+      {f:'harpagon',t:'cleante',      lbl:'son fils',         c:'#1e3a8a', dash:false},
+      {f:'harpagon',t:'elise',        lbl:'sa fille',         c:'#9d174d', dash:false},
+      {f:'cleante', t:'mariane',      lbl:'❤️ aime',          c:'#7e22ce', dash:true},
+      {f:'elise',   t:'valere',       lbl:'❤️ aime',          c:'#14532d', dash:true},
+      {f:'anselme', t:'valere',       lbl:'🔍 son pere',      c:'#065f46', dash:true},
+      {f:'anselme', t:'mariane',      lbl:'🔍 son pere',      c:'#065f46', dash:true},
+      {f:'harpagon',t:'anselme',      lbl:'rival / Elise',   c:'#dc2626', dash:true},
+      {f:'harpagon',t:'mariane',      lbl:'veut l\'epouser', c:'#b91c1c', dash:true},
+      {f:'frosine', t:'harpagon',     lbl:'arrange mariage',  c:'#92400e', dash:true},
+      {f:'la-fleche',t:'cleante',     lbl:'valet fidele',     c:'#0369a1', dash:false},
+      {f:'maitre-jacques',t:'harpagon',lbl:'cuisinier',       c:'#7c3aed', dash:false},
+    ];
+
+    var W=880, H=510;
+    var nm={}; nodes.forEach(function(n){nm[n.id]=n;});
+
+    var svg='<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg" style="width:100%;font-family:Georgia,serif">';
+    // defs
+    svg+='<defs>';
+    svg+='<marker id="ar" markerWidth="7" markerHeight="7" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#888"/></marker>';
+    svg+='<filter id="sh"><feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity=".18"/></filter>';
+    svg+='</defs>';
+
+    // bg
+    svg+='<rect x="0" y="0" width="'+W+'" height="'+H+'" rx="14" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>';
+
+    // zone famille principale
+    svg+='<rect x="300" y="16" width="280" height="100" rx="9" fill="#fff7ed" stroke="#fed7aa" stroke-width="1.2" opacity=".9"/>';
+    svg+='<text x="440" y="32" text-anchor="middle" font-size="9" font-weight="700" letter-spacing="1.2" fill="#92400e">FAMILLE HARPAGON</text>';
+
+    // liens
+    liens.forEach(function(l){
+      var a=nm[l.f], b=nm[l.t]; if(!a||!b) return;
+      var dx=b.x-a.x, dy=b.y-a.y, d=Math.sqrt(dx*dx+dy*dy)||1;
+      var r=52; // box radius approx
+      var sx=a.x+dx/d*r, sy=a.y+dy/d*28;
+      var ex=b.x-dx/d*r, ey=b.y-dy/d*28;
+      var mx=(a.x+b.x)/2, my=(a.y+b.y)/2;
+      var sd=l.dash?'stroke-dasharray="5,3"':'';
+      svg+='<line x1="'+sx+'" y1="'+sy+'" x2="'+ex+'" y2="'+ey+'" stroke="'+l.c+'" stroke-width="1.7" '+sd+' marker-end="url(#ar)" opacity=".75"/>';
+      svg+='<rect x="'+(mx-30)+'" y="'+(my-9)+'" width="60" height="16" rx="4" fill="white" opacity=".9"/>';
+      svg+='<text x="'+mx+'" y="'+(my+4)+'" text-anchor="middle" font-size="8" fill="'+l.c+'" font-weight="600">'+l.lbl+'</text>';
+    });
+
+    // noeuds
+    var nw=108, nh=60;
+    nodes.forEach(function(n){
+      var x0=n.x-nw/2, y0=n.y-nh/2;
+      svg+='<g onclick="openPerso(\''+n.id+'\')" style="cursor:pointer">';
+      svg+='<rect x="'+x0+'" y="'+y0+'" width="'+nw+'" height="'+nh+'" rx="10" fill="'+n.bg+'" stroke="white" stroke-width="2.5" filter="url(#sh)"/>';
+      svg+='<text x="'+n.x+'" y="'+(n.y-11)+'" text-anchor="middle" font-size="17">'+n.emoji+'</text>';
+      svg+='<text x="'+n.x+'" y="'+(n.y+6)+'" text-anchor="middle" font-size="11.5" font-weight="700" fill="'+n.tx+'">'+n.nom+'</text>';
+      svg+='<text x="'+n.x+'" y="'+(n.y+19)+'" text-anchor="middle" font-size="8" fill="'+n.tx+'" opacity=".8">'+n.sous+'</text>';
+      svg+='</g>';
+    });
+
+    // legende + hint
+    svg+='<line x1="20" y1="490" x2="38" y2="490" stroke="#555" stroke-width="1.8"/>';
+    svg+='<text x="43" y="494" font-size="9" fill="#555">lien de famille</text>';
+    svg+='<line x1="140" y1="490" x2="158" y2="490" stroke="#555" stroke-width="1.8" stroke-dasharray="4,3"/>';
+    svg+='<text x="163" y="494" font-size="9" fill="#555">lien amoureux / autre</text>';
+    svg+='<text x="'+W/2+'" y="508" text-anchor="middle" font-size="10" fill="#94a3b8" font-style="italic">Clique sur un personnage pour voir sa fiche detaillee</text>';
+    svg+='</svg>';
+    return svg;
+  }
+
+  function renderPersonnages() {
+    document.getElementById('famille-tree').innerHTML = buildFamilleTree();
+    var g=''; 
+    PERSOS.forEach(function(p){
+      var fg=FAMILLE_GROUPS[p.famille];
+      g+='<div class="pcard" onclick="openPerso(\''+p.id+'\')" style="border-color:'+p.couleur+'">';
+      g+='<span class="pemoji">'+p.emoji+'</span>';
+      g+='<span class="pnom" style="color:'+p.couleur+'">'+p.nom+'</span>';
+      g+='<span class="prole">'+p.role+'</span>';
+      g+='<span class="pfamille" style="background:'+fg.couleur+';color:'+p.couleur+'">'+fg.label+'</span>';
+      g+='</div>';
+    });
+    document.getElementById('perso-grid').innerHTML=g;
+  }
+
+  function openPerso(id){
+    var p=PERSOS.find(function(x){return x.id===id;});
+    if(!p) return;
+    var fg=FAMILLE_GROUPS[p.famille];
+    var h='';
+
+    // header
+    h+='<div style="display:flex;align-items:center;gap:14px;margin-bottom:16px;padding-bottom:14px;border-bottom:2px solid #f1f5f9">';
+    h+='<div style="width:58px;height:58px;border-radius:50%;background:'+p.couleur+';display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0">'+p.emoji+'</div>';
+    h+='<div><div style="font-size:21px;font-weight:800;color:'+p.couleur+'">'+p.nom+'</div>';
+    h+='<div style="font-size:12px;color:#64748b;margin-top:2px">'+p.role+'</div>';
+    h+='<span style="background:'+fg.couleur+';color:'+p.couleur+';font-size:10px;font-weight:700;padding:2px 10px;border-radius:10px;display:inline-block;margin-top:4px">'+fg.label+'</span>';
+    h+='</div></div>';
+
+    // intro
+    h+='<div style="font-size:14px;line-height:1.75;color:#1e293b;margin-bottom:16px;background:#f8fafc;padding:13px;border-radius:8px;border-left:4px solid '+p.couleur+'">'+p.intro+'</div>';
+
+    // relations
+    h+='<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:#64748b;margin:14px 0 8px">🔗 Ses liens avec les autres personnages</div>';
+    h+='<div style="display:flex;flex-direction:column;gap:5px;margin-bottom:16px">';
+    p.relations.forEach(function(r){
+      h+='<div style="background:#fff;border:1px solid #e2e8f0;border-radius:7px;padding:8px 12px;font-size:13px;line-height:1.55;color:#334155">'+r+'</div>';
+    });
+    h+='</div>';
+
+    // actes
+    h+='<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:#64748b;margin:14px 0 8px">📖 Ce qu\'il fait acte par acte</div>';
+    p.actes.forEach(function(a,i){
+      h+='<div style="display:flex;gap:10px;margin-bottom:7px">';
+      h+='<div style="flex-shrink:0;width:26px;height:26px;border-radius:50%;background:'+p.couleur+';color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin-top:2px">'+(i+1)+'</div>';
+      h+='<div style="background:#f8fafc;border-radius:7px;padding:8px 12px;flex:1;font-size:13px;line-height:1.6;color:#334155"><strong style="color:'+p.couleur+'">'+a.acte+' : </strong>'+a.resume+'</div>';
+      h+='</div>';
+    });
+
+    // citation
+    h+='<div style="background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:12px 15px;margin:14px 0;font-size:13px;color:#92400e">';
+    h+='<div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.9px;margin-bottom:5px">📜 Sa replique memorable</div>';
+    h+='<em>&laquo;&nbsp;'+p.citation+'&nbsp;&raquo;</em></div>';
+
+    // anecdote
+    h+='<div style="background:#f0f9ff;border:1px solid #bae6fd;border-radius:8px;padding:12px 15px;font-size:13px;color:#0369a1">';
+    h+='<div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.9px;margin-bottom:5px">🎭 Le saviez-vous ?</div>';
+    h+=p.anecdote+'</div>';
+
+    // nav autres persos
+    h+='<div style="margin-top:16px;padding-top:12px;border-top:1px solid #f1f5f9">';
+    h+='<div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:#94a3b8;margin-bottom:8px">Voir un autre personnage</div>';
+    h+='<div style="display:flex;flex-wrap:wrap;gap:6px">';
+    PERSOS.forEach(function(pp){
+      if(pp.id===id) return;
+      h+='<button onclick="openPerso(\''+pp.id+'\')" style="background:#f1f5f9;border:1px solid #e2e8f0;border-radius:6px;padding:5px 10px;font-size:12px;cursor:pointer;font-family:Georgia,serif;color:#334155" onmouseover="this.style.background=\''+pp.couleur+'\';this.style.color=\'#fff\'" onmouseout="this.style.background=\'#f1f5f9\';this.style.color=\'#334155\'">'+pp.emoji+' '+pp.nom+'</button>';
+    });
+    h+='</div></div>';
+
+    document.getElementById('perso-modal-inner').innerHTML=h;
+    document.getElementById('perso-modal').style.display='flex';
+    document.body.style.overflow='hidden';
+  }
+
+  function closePerso(){
+    document.getElementById('perso-modal').style.display='none';
+    document.body.style.overflow='';
+  }
+  document.getElementById('perso-modal').addEventListener('click',function(e){if(e.target===this)closePerso();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closePerso();});
+
+  renderPersonnages();
+
+    // ===== INIT =====
   renderAC();
   renderL(1);
   </script>
